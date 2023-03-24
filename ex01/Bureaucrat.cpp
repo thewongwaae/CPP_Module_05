@@ -127,6 +127,10 @@ void	Bureaucrat::demote( void ) {
 	}
 }
 
+void	Bureaucrat::signForm( Form &f ) {
+	f.beSigned(*this);
+}
+
 const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
 	return ("Grade too high");
 }

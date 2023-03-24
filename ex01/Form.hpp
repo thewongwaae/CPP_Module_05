@@ -20,8 +20,13 @@ class Form {
 		~Form( void );
 		Form &operator=( const Form &assign );
 
-		void setReq( int gradeSign, int gradeExec );
-		void sign( Bureaucrat &name );
+		void beSigned( Bureaucrat &person );
+
+		std::string getName( void );
+		int getGradeSign( void );
+		int getGradeExec( void );
+		bool getSigned( void );
+		
 
 	class GradeTooLowException : public std::exception {
 		public:
