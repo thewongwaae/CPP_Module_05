@@ -1,36 +1,35 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat( void ) : _name("lvl1 crook"), _grade(150) {
-	std::cout	<< GREEN << "Bureaucrat " << _name
-				<< " [" << _grade << "] constructed"
-				<< RESET << std::endl;
-}
+Bureaucrat::Bureaucrat( void ) : Bureaucrat("lvl1 crook", 150) {}
 
-Bureaucrat::Bureaucrat( std::string name ) : _name(name), _grade(150) {
-	std::cout	<< GREEN << "Bureaucrat " << _name
-				<< " [" << _grade << "] constructed"
-				<< RESET << std::endl;
-}
+Bureaucrat::Bureaucrat( std::string name ) : Bureaucrat(name, 150) {}
 
-Bureaucrat::Bureaucrat( int grade ) : _name("lvl1 crook") {
+Bureaucrat::Bureaucrat( int grade ) : Bureaucrat("lvl1 crook", grade) {}
+
+Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name) {
 	std::cout	<< YELLOW << "Trying to construct Bureaucrat " << _name
-				<< " [" << _grade << std::endl;
+				<< " [" << grade << "]" << std::endl;
 	try
 	{
 		setGrade(grade);
 	}
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
-		std::cerr	<< RED << e.what() << '\n'
-					
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 1"
+					<< std::endl;
+		_grade = 1;
 	}
-	
-}
-
-Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name), _grade(grade) {
-	std::cout	<< "Bureaucrat " << _name
+	catch(Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 150"
+					<< std::endl;
+		_grade = 150;
+	}
+	std::cout	<< GREEN << "Bureaucrat " << _name
 				<< " [" << _grade << "] constructed"
-				<< std::endl;
+				<< RESET << std::endl;
 }
 
 Bureaucrat::Bureaucrat( const Bureaucrat &copy ) {
@@ -69,12 +68,31 @@ void Bureaucrat::setGrade( int grade ) {
 }
 
 void	Bureaucrat::promote( void ) {
-	if (_grade == 150)
-		throw()
+	try
+	{
+		setGrade(_grade - 1);
+	}
+	catch(Bureaucrat::GradeTooHighException &e)
+	{
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 1"
+					<< RESET << std::endl;
+		_grade = 1;
+	}
 }
 
 void	Bureaucrat::demote( void ) {
-
+	try
+	{
+		setGrade(_grade + 1);
+	}
+	catch(Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 150"
+					<< RESET << std::endl;
+		_grade = 150;
+	}
 }
 
 const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
