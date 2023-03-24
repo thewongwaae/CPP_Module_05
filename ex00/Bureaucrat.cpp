@@ -22,14 +22,14 @@ Bureaucrat::Bureaucrat( int grade ) : _name("lvl1 crook") {
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 1"
+					<< " Setting grade to 1"
 					<< std::endl;
 		_grade = 1;
 	}
 	catch(Bureaucrat::GradeTooLowException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 150"
+					<< " Setting grade to 150"
 					<< std::endl;
 		_grade = 150;
 	}
@@ -48,14 +48,14 @@ Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name) {
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 1"
+					<< " Setting grade to 1"
 					<< std::endl;
 		_grade = 1;
 	}
 	catch(Bureaucrat::GradeTooLowException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 150"
+					<< " Setting grade to 150"
 					<< std::endl;
 		_grade = 150;
 	}
