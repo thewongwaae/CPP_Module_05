@@ -1,10 +1,42 @@
 #include "Bureaucrat.hpp"
 
-Bureaucrat::Bureaucrat( void ) : Bureaucrat("lvl1 crook", 150) {}
+Bureaucrat::Bureaucrat( void ) : _name("lvl1 crook"), _grade(150) {
+	std::cout	<< GREEN << "Bureaucrat " << _name
+				<< " [" << _grade << "] constructed"
+				<< RESET << std::endl;
+}
 
-Bureaucrat::Bureaucrat( std::string name ) : Bureaucrat(name, 150) {}
+Bureaucrat::Bureaucrat( std::string name ) : _name(name), _grade(150) {
+	std::cout	<< GREEN << "Bureaucrat " << _name
+				<< " [" << _grade << "] constructed"
+				<< RESET << std::endl;
+}
 
-Bureaucrat::Bureaucrat( int grade ) : Bureaucrat("lvl1 crook", grade) {}
+Bureaucrat::Bureaucrat( int grade ) : _name("lvl1 crook") {
+	std::cout	<< YELLOW << "Trying to construct Bureaucrat " << _name
+				<< " [" << grade << "]" << std::endl;
+	try
+	{
+		setGrade(grade);
+	}
+	catch(Bureaucrat::GradeTooHighException &e)
+	{
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 1"
+					<< std::endl;
+		_grade = 1;
+	}
+	catch(Bureaucrat::GradeTooLowException &e)
+	{
+		std::cerr	<< RED << e.what()
+					<< "Setting grade to 150"
+					<< std::endl;
+		_grade = 150;
+	}
+	std::cout	<< GREEN << "Bureaucrat " << _name
+				<< " [" << _grade << "] constructed"
+				<< RESET << std::endl;
+}
 
 Bureaucrat::Bureaucrat( std::string name, int grade ) : _name(name) {
 	std::cout	<< YELLOW << "Trying to construct Bureaucrat " << _name
@@ -75,7 +107,7 @@ void	Bureaucrat::promote( void ) {
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 1"
+					<< " Setting grade to 1"
 					<< RESET << std::endl;
 		_grade = 1;
 	}
@@ -89,7 +121,7 @@ void	Bureaucrat::demote( void ) {
 	catch(Bureaucrat::GradeTooLowException &e)
 	{
 		std::cerr	<< RED << e.what()
-					<< "Setting grade to 150"
+					<< " Setting grade to 150"
 					<< RESET << std::endl;
 		_grade = 150;
 	}
@@ -105,6 +137,7 @@ const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
 
 std::ostream &operator<<( std::ostream &o, Bureaucrat *b ) {
 	o	<< "Bureaucrat " << b->getName()
-		<< " [" << b->getGrade() << "] constructed"
+		<< " [" << b->getGrade() << "]"
 		<< std::endl;
+	return o;
 }

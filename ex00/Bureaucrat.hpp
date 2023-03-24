@@ -6,11 +6,11 @@
 #include <exception>
 
 # define RESET "\033[0m"
-# define RED "\033[31m" //death
-# define CYAN "\033[36m" //eating
-# define YELLOW "\033[38;5;220m" //thinking
-# define GREEN "\033[32m" //take fork
-# define PURPLE "\033[38;5;129m" //sleeping
+# define RED "\033[31m"
+# define CYAN "\033[36m"
+# define YELLOW "\033[38;5;220m"
+# define GREEN "\033[32m"
+# define PURPLE "\033[38;5;129m"
 
 class Bureaucrat {
 	private:
