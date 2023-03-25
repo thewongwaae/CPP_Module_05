@@ -22,10 +22,10 @@ class Form {
 
 		void beSigned( Bureaucrat &person );
 
-		std::string getName( void );
-		int getGradeSign( void );
-		int getGradeExec( void );
-		bool getSigned( void );
+		std::string getName( void ) const;
+		int getGradeSign( void ) const;
+		int getGradeExec( void ) const;
+		bool getSigned( void ) const;
 		
 
 	class GradeTooLowException : public std::exception {
