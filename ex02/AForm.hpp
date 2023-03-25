@@ -7,19 +7,20 @@
 class Bureaucrat;
 
 class Form {
-	private:
+	protected:
 		const std::string	_name;
 		bool				_signed;
 		const int			_gradeSign;
 		const int			_gradeExec;
-
-	public:
+		
 		Form( void );
 		Form( std::string name );
 		Form( int gradeSign, int gradeExec );
 		Form( std::string name, int gradeSign, int gradeExec );
+
+	public:
 		Form( const Form &copy );
-		~Form( void );
+		virtual ~Form( void );
 		Form &operator=( const Form &assign );
 
 		void beSigned( Bureaucrat &person );
