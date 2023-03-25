@@ -100,39 +100,47 @@ void Bureaucrat::setGrade( int grade ) {
 }
 
 void	Bureaucrat::promote( void ) {
+	bool fail = false;
 	try
 	{
 		setGrade(_grade - 1);
 	}
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
+		fail = true;
 		std::cerr	<< RED << e.what()
 					<< " Setting grade to 1"
 					<< RESET << std::endl;
 		_grade = 1;
 	}
+	if (!fail)
+		std::cout << "Bureaucrat " << _name << " promoted to " << _grade <<  std::endl;
 }
 
 void	Bureaucrat::demote( void ) {
+	bool fail = false;
 	try
 	{
 		setGrade(_grade + 1);
 	}
 	catch(Bureaucrat::GradeTooLowException &e)
 	{
+		fail = true;
 		std::cerr	<< RED << e.what()
 					<< " Setting grade to 150"
 					<< RESET << std::endl;
 		_grade = 150;
 	}
+	if (!fail)
+		std::cout << "Bureaucrat " << _name << " demoted to " << _grade <<  std::endl;
 }
 
 const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
-	return ("Grade too high");
+	return ("Grade too high.");
 }
 
 const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
-	return ("Grade too low");
+	return ("Grade too low.");
 }
 
 std::ostream &operator<<( std::ostream &o, Bureaucrat *b ) {

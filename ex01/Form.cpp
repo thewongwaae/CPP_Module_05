@@ -48,11 +48,10 @@ Form::Form( std::string name, int gradeSign, int gradeExec ) : _name(name), _sig
 	}
 }
 
-Form::Form( const Form &copy ) : _name(copy.getName() + "_copy"), _gradeSign(copy.getGradeSign()), _gradeExec(copy.getGradeExec()), _signed(copy.getSigned()) {
+Form::Form( const Form &copy ) : _name(copy.getName() + "_copy"), _signed(copy.getSigned()), _gradeSign(copy.getGradeSign()), _gradeExec(copy.getGradeExec()) {
 	std::cout	<< "Form " << copy.getName()
 				<< " copied into " << this->getName()
 				<< std::endl;
-	
 }
 
 Form::~Form( void ) {
@@ -61,8 +60,9 @@ Form::~Form( void ) {
 
 // can't override because most vars are const
 Form &Form::operator=( const Form &assign ) {
-	if (this != &assign)
+	if (this == &assign)
 		return *this;
+	return *this;
 }
 
 void Form::beSigned( Bureaucrat &person ) {

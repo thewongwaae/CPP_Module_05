@@ -10,4 +10,15 @@ int main( void ) {
 	std::cout << "[ TESTING WRONG VALUE CONSTRUCTS ]" << std::endl;
 	Bureaucrat(160);
 	Bureaucrat("Poggies", 0);
+
+	std::cout << "[ PROMOTE AND DEMOTE ]" << std::endl;
+	Bureaucrat *bob = new Bureaucrat();
+	std::cout << bob;
+	bob->promote();
+	std::cout << bob;
+
+	delete bob;
+
+	system("leaks Bureaucrats");
+	return (0);
 }

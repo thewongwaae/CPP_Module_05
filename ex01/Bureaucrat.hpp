@@ -13,6 +13,8 @@
 # define GREEN "\033[32m"
 # define PURPLE "\033[38;5;129m"
 
+class Form;
+
 class Bureaucrat {
 	private:
 		const std::string	_name;

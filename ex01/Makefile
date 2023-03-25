@@ -1,10 +1,10 @@
-NAME	= Bureaucrats
-CPP		= c++ -fsanitize=address -fno-omit-frame-pointer
+NAME	= Form
+CPP		= c++
 FLAGS	= -Wall -Wextra -Werror -I -std=c++98
 RM		= rm -rf
 
-SRC		= Bureaucrat.cpp main.cpp
-INC		= Bureaucrat.hpp
+SRC		= Bureaucrat.cpp Form.cpp main.cpp
+INC		= Bureaucrat.hpp Form.hpp
 
 OBJ		= $(SRC:%.cpp=%.o)
 
@@ -15,7 +15,7 @@ all : $(NAME)
 	@$(CPP) $(FLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	@echo "\n\033[0;32mBureaucreats?\033[0m"
+	@echo "\n\033[0;32mSign those forms\033[0m"
 	@$(CPP) $(FLAGS) $^ -o $@
 
 clean:
@@ -23,7 +23,7 @@ clean:
 	@$(RM) $(OBJ)
 
 fclean: clean
-	@echo "\033[0;31mBureaucrats.\033[0m"
+	@echo "\033[0;31mInto the fireplace\033[0m"
 	@$(RM) $(NAME)
 
 re : fclean all

@@ -1,5 +1,5 @@
 NAME	= Bureaucrats
-CPP		= c++ -fsanitize=address -fno-omit-frame-pointer
+CPP		= c++
 FLAGS	= -Wall -Wextra -Werror -I -std=c++98
 RM		= rm -rf
 
