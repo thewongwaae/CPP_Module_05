@@ -1,31 +1,21 @@
-#pragma once
-#ifndef SHRUBBERYCREATIONFORM_CPP
-#define SHRUBBERYCREATIONFORM_CPP
+#include "ShrubberyCreationForm.hpp"
 
-#include <iostream>
-#include <fstream>
-#include "Bureaucrat.hpp"
-#include "AForm.hpp"
+ShrubberyCreationForm::ShrubberyCreationForm( void ) {
 
-class Bureaucrat;
+}
 
-class ShrubberyCreationForm : public Form {
-	private:
-		const std::string _target;
-		// moved this into private because pdf says only one constructor allowed
-		ShrubberyCreationForm( void );
-	
-	public:
-		ShrubberyCreationForm( std::string target );
-		ShrubberyCreationForm( const ShrubberyCreationForm &copy );
-		~ShrubberyCreationForm( void );
-		ShrubberyCreationForm &operator=( const ShrubberyCreationForm &assign );
+ShrubberyCreationForm::ShrubberyCreationForm( const ShrubberyCreationForm &copy ) {
 
-		void execute( const Bureaucrat &executor ) const;
+}
 
-		std::string getTarget( void ) const;
-};
+ShrubberyCreationForm &ShrubberyCreationForm::operator=( const ShrubberyCreationForm &assign ) {
 
-std::ostream &operator<<( std::ostream &o, ShrubberyCreationForm *form );
+}
 
-#endif
+ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
+
+}
+
+std::ostream &operator<<( std::ostream &o, ShrubberyCreationForm *a ) {
+
+}
