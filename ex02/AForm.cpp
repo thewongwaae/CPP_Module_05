@@ -100,6 +100,10 @@ const char *Form::GradeTooLowException::what() const throw() {
 	return ("Form's grade requirement too low.");
 }
 
+const char *Form::FormNotSignedException::what() const throw() {
+	return ("Unable to execute, Form has not been signed.");
+}
+
 std::ostream &operator<<( std::ostream &o, Form *f) {
 	o	<< "Form " << f->getName()
 		<< "\nSign req " << f->getGradeSign()
