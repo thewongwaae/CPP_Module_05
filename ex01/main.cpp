@@ -138,7 +138,5 @@ int main(void)
 		}
 		std::cout << std::endl;
 	}
-
-	system("leaks Form");
 	return (0);
 }

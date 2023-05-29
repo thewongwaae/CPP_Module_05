@@ -2,22 +2,22 @@
 
 Form::Form( void ) : _name("Mysterious form"), _signed(false), _gradeSign(150), _gradeExec(150) {
 	std::cout	<< GREEN << "Form " << _name
-				<< "with sign grade [" << _gradeSign << "] "
-				<< " and sign exec grade [" << _gradeExec 
+				<< " with sign grade [" << _gradeSign << "] "
+				<< "and sign exec grade [" << _gradeExec 
 				<< "] constructed" << RESET << std::endl;
 }
 
 Form::Form( std::string name ) : _name(name), _signed(false), _gradeSign(150), _gradeExec(150) {
 	std::cout	<< GREEN << "Form " << _name
-				<< "with sign grade [" << _gradeSign << "] "
-				<< " and sign exec grade [" << _gradeExec 
+				<< " with sign grade [" << _gradeSign << "] "
+				<< "and sign exec grade [" << _gradeExec 
 				<< "] constructed" << RESET << std::endl;
 }
 
 Form::Form( int gradeSign, int gradeExec ) : _name("Mysterious form"), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
 	std::cout	<< GREEN << "Trying to create Form " << _name
-				<< "with sign grade [" << gradeSign << "] "
-				<< " and sign exec grade [" << gradeExec 
+				<< " with sign grade [" << gradeSign << "] "
+				<< "and sign exec grade [" << gradeExec 
 				<< "]" << RESET << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
@@ -25,16 +25,16 @@ Form::Form( int gradeSign, int gradeExec ) : _name("Mysterious form"), _signed(f
 		throw(GradeTooLowException());
 	else {
 		std::cout	<< GREEN << "Form " << _name
-					<< "with sign grade [" << _gradeSign << "] "
-					<< " and sign exec grade [" << _gradeExec 
+					<< " with sign grade [" << _gradeSign << "] "
+					<< "and sign exec grade [" << _gradeExec 
 					<< "] constructed" << RESET << std::endl;
 	}
 }
 
 Form::Form( std::string name, int gradeSign, int gradeExec ) : _name(name), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
 	std::cout	<< GREEN << "Form " << _name
-				<< "with sign grade [" << gradeSign << "] "
-				<< " and sign exec grade [" << gradeExec 
+				<< " with sign grade [" << gradeSign << "] "
+				<< "and sign exec grade [" << gradeExec 
 				<< "] constructed" << RESET << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
@@ -42,8 +42,8 @@ Form::Form( std::string name, int gradeSign, int gradeExec ) : _name(name), _sig
 		throw(GradeTooLowException());
 	else {
 		std::cout	<< GREEN << "Form " << _name
-					<< "with sign grade [" << _gradeSign << "] "
-					<< " and sign exec grade [" << _gradeExec 
+					<< " with sign grade [" << _gradeSign << "] "
+					<< "and sign exec grade [" << _gradeExec 
 					<< "] constructed" << RESET << std::endl;
 	}
 }
