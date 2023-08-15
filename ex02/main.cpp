@@ -1,187 +1,188 @@
 #include "Bureaucrat.hpp"
-#include "Form.hpp"
-#include "PresidentialPardonForm.hpp"
-#include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
-int main(void)
-{
-	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
-		Form *b = new PresidentialPardonForm("default");
-		// Form *c = new RobotomyRequestForm();
-		// Form *d = new ShrubberyCreationForm();
-		std::cout << std::endl;
+int main( void ) {
+	// I hate making test files
+	std::cout << "\033[35;1m\n[ GENERAL FORM TESTS ]\033[0m" << std::endl;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
+	std::string target = "DECOY";
+	ShrubberyCreationForm *SCF = new ShrubberyCreationForm(target); //s145 e137
+	RobotomyRequestForm *RRF = new RobotomyRequestForm(target); //s72 e45
+	PresidentialPardonForm *PPF = new PresidentialPardonForm(target); //s25 e5
+	std::cout << std::endl;
 
-		try
-		{
-			b->beSigned(*a);
-			// b->execute(*a);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
+	std::cout << SCF;
+	std::cout << RRF;
+	std::cout << PPF;
 
-		std::cout << b;
-		std::cout << std::endl;
+	std::cout << "\033[35;1m\n[ INSTANTIATING BUREAUCRATS ]\033[0m" << std::endl;
+	Bureaucrat *bee = new Bureaucrat("Bee", 150);
+	Bureaucrat *boo = new Bureaucrat("Boo", 150);
+	std::cout << std::endl;
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		std::cout << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new PresidentialPardonForm("some dude");
-		// Form *d = new Form(*c);
-		// Form *d = new Form("Rent Contract", 140, 100); // you are not able to construct an abstract class here
-		std::cout << std::endl;
+	std::cout << "\033[35;1m\n[ SHRUBBERY FORM TESTS ]\033[0m" << std::endl;
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign Grade--------\033[0m" << std::endl;
+	bee->promote(5);
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		std::cout << std::endl;
+	std::cout << "\033[35m\n---------Cloning--------\033[0m" << std::endl;
+	ShrubberyCreationForm *cloneSCF = new ShrubberyCreationForm(*SCF);
+	std::cout << std::endl;
 
-		// Try to execute before signing
-		try
-		{
-			c->execute(*b);
-		}
-		catch (Form::FormNotSignedException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-		// Assistant signs the Form
-		try
-		{
-			c->beSigned(*a);
-			// a->signForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
+	std::cout << "Original SCF: " << SCF;
+	std::cout << "Cloned SCF: " << cloneSCF;
 
-		// CEO signs the Form
-		std::cout << std::endl;
-		std::cout << c;
-		std::cout << std::endl;
-		try
-		{
-			c->beSigned(*b);
-			// b->signForm(*c);
-		}
-		// catch(Form::GradeTooLowException &e)
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
-		std::cout << c;
-		std::cout << std::endl;
+	std::cout << "BOO INVALID SIGN GRADE: ";
+	cloneSCF->beSigned(boo);
+	std::cout << std::endl;
 
-		// try signing the from again
-		std::cout << std::endl;
-		b->signForm(*c);
-		std::cout << std::endl;
+	std::cout << "BEE VALID SIGN GRADE: ";
+	cloneSCF->beSigned(bee);
+	std::cout << std::endl;
 
-		// execute the Form from assistant
-		try
-		{
-			c->execute(*a);
-			// a.executeForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
+	std::cout << "Original SCF: " << SCF;
+	std::cout << "Cloned SCF: " << cloneSCF;
 
-		// execute Form from CEO
-		try
-		{
-			c->execute(*b);
-			// b.executeForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to execute the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << std::endl;
+	delete cloneSCF;
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign and Execution Grade--------\033[0m" << std::endl;
+	std::cout << boo;
+	std::cout << bee;
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Emperor", 1);
-		PresidentialPardonForm *b = new PresidentialPardonForm("this other dude");
-		PresidentialPardonForm *c = new PresidentialPardonForm(*b);
-		std::cout << std::endl;
+	bee->promote(10); //slightly above execution grade
+	boo->promote(10);
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		b->beSigned(*a);
-		a->signForm(*c);
-		b->execute(*a);
-		a->executeForm(*c);
-		// c->execute(*a);
-		std::cout << std::endl;
+	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
+	std::cout << "BOO SIGN FORM: ";
+	SCF->beSigned(boo);
+	std::cout << std::endl;
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	std::cout << "--------------------------------------------------------------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
+	std::cout << "BEE ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
+	SCF->beSigned(bee);
+	std::cout << std::endl;
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Emperor", 1);
-		RobotomyRequestForm *b = new RobotomyRequestForm("Bender");
-		ShrubberyCreationForm *c = new ShrubberyCreationForm("christmas");
-		std::cout << std::endl;
+	std::cout << "BOO INVALID EXECUTION GRADE: ";
+	boo->executeForm(*SCF);
+	std::cout << std::endl;
+	
+	std::cout << "BEE VALID EXECUTION GRADE: ";
+	bee->executeForm(*SCF);	
+	std::cout << std::endl;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
-		b->beSigned(*a);
-		a->signForm(*c);
-		for (int i= 0; i < 10; i++)
-			b->execute(*a);
-		// a->executeForm(*c);
-		c->execute(*a);
-		std::cout << std::endl;
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	return (0);
+	std::cout << "\033[35;1m\n[ ROBOTOMY FORM TESTS ]\033[0m" << std::endl;
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign Grade--------\033[0m" << std::endl;
+	bee->promote(63);
+
+	std::cout << "\033[35m\n---------Cloning--------\033[0m" << std::endl;
+	RobotomyRequestForm *cloneRRF = new RobotomyRequestForm(*RRF);
+	std::cout << std::endl;
+
+	std::cout << "Original RRF: " << RRF;
+	std::cout << "Cloned RRF: " << cloneRRF;
+
+	std::cout << "BOO INVALID SIGN GRADE: ";
+	cloneRRF->beSigned(boo);
+	std::cout << std::endl;
+
+	std::cout << "BEE VALID SIGN GRADE: ";
+	cloneRRF->beSigned(bee);
+	std::cout << std::endl;
+
+	std::cout << "Original RRF: " << RRF;
+	std::cout << "Cloned RRF: " << cloneRRF;
+
+	delete cloneRRF;
+
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign and Execution Grade--------\033[0m" << std::endl;
+	std::cout << boo;
+	std::cout << bee;
+	std::cout << std::endl;
+
+	bee->promote(27); //execution grade (45)
+	boo->promote(70); //sign grade (70)
+
+	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
+	std::cout << "BOO SIGN FORM: ";
+	RRF->beSigned(boo);
+	std::cout << std::endl;
+
+	std::cout << "BEE ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
+	RRF->beSigned(bee);
+	std::cout << std::endl;
+
+	std::cout << "BOO INVALID EXECUTION GRADE: ";
+	boo->executeForm(*RRF);
+	std::cout << std::endl;
+	
+	std::cout << "BEE VALID EXECUTION GRADE: ";
+	bee->executeForm(*RRF);	
+
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
+
+	std::cout << "\033[35;1m\n[ PRESIDENTIAL PARDON FORM TESTS ]\033[0m" << std::endl;
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign Grade--------\033[0m" << std::endl;
+	boo->promote(45);
+
+	std::cout << "\033[35m\n---------Cloning--------\033[0m" << std::endl;
+	PresidentialPardonForm *clonePPF = new PresidentialPardonForm(*PPF);
+	std::cout << std::endl;
+
+	std::cout << "Original PPF: " << PPF;
+	std::cout << "Cloned PPF: " << clonePPF;
+
+	std::cout << "BEE INVALID SIGN GRADE: ";
+	clonePPF->beSigned(bee);
+	std::cout << std::endl;
+
+	std::cout << "BOO VALID SIGN GRADE: ";
+	clonePPF->beSigned(boo);
+	std::cout << std::endl;
+
+	std::cout << "Original PPF: " << PPF;
+	std::cout << "Cloned PPF: " << clonePPF;
+
+	delete clonePPF;
+
+	std::cout << "\033[35m\n---------Promoting Bureaucrat to Valid Sign and Execution Grade--------\033[0m" << std::endl;
+	std::cout << boo;
+	std::cout << bee;
+	std::cout << std::endl;
+
+	bee->promote(40); //5
+
+	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
+	std::cout << "BEE SIGN FORM: ";
+	PPF->beSigned(bee);
+	std::cout << std::endl;
+
+	std::cout << "BOO ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
+	PPF->beSigned(boo);
+	std::cout << std::endl;
+
+	std::cout << "BOO INVALID EXECUTION GRADE: ";
+	boo->executeForm(*PPF);
+	std::cout << std::endl;
+	
+	std::cout << "BEE VALID EXECUTION GRADE: ";
+	bee->executeForm(*PPF);	
+	std::cout << std::endl;
+
+
+/*======================================================================================================================================*/
+/*======================================================================================================================================*/
+
+	std::cout << "\033[35;1m\n[ DESTRUCTING ]\033[0m" << std::endl;
+	delete SCF;
+	delete RRF;
+	delete PPF;
+	delete boo;
+	delete bee;
 }

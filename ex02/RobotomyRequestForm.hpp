@@ -1,27 +1,18 @@
-#ifndef ROBOTOMYREQUESTFORM_H
-# define ROBOTOMYREQUESTFORM_H
+#pragma once
 
-#include <iostream>
-#include <fstream>
-#include "Bureaucrat.hpp"
 #include "AForm.hpp"
 
-class RobotomyRequestForm : public Form {
+class RobotomyRequestForm : public AForm {
 	private:
-		const std::string _target;
+		std::string _target;
 		RobotomyRequestForm( void );
-	
+
 	public:
 		RobotomyRequestForm( std::string target );
-		RobotomyRequestForm( const RobotomyRequestForm &copy );
-		~RobotomyRequestForm( void );
+		RobotomyRequestForm( const RobotomyRequestForm &copy);
 		RobotomyRequestForm &operator=( const RobotomyRequestForm &assign );
+		virtual ~RobotomyRequestForm( void );
 
-		void execute( const Bureaucrat &executor ) const;
-
-		std::string getTarget( void ) const;
+		void robotomize( std::string target );
+		void execute( Bureaucrat const &executor ) const;
 };
-
-std::ostream &operator<<( std::ostream &o, RobotomyRequestForm *a );
-
-#endif

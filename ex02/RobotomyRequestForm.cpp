@@ -1,58 +1,40 @@
 #include "RobotomyRequestForm.hpp"
+#include <time.h>
 
-/* -------------------- Constructors, Operators, Deconstructors -------------------- */
-
-RobotomyRequestForm::RobotomyRequestForm( void ) : Form("RobotomyRequestForm", 72, 45), _target("default") {
-	std::cout << "RobotomyRequestForm constructed" << std::endl;
+RobotomyRequestForm::RobotomyRequestForm( void ) : AForm("RobotomyRequestForm", 72, 45) {
+	_target	= "Unknown";
+	std::cout << "Robotomy Request Form " + getName() + " constructed." << std::endl;
 }
 
-RobotomyRequestForm::RobotomyRequestForm( std::string target ) : Form("RobotomyRequestForm", 72, 45), _target(target) {
-	std::cout	<< "RobotomyRequestForm "
-				<< _target << " constructed"
-				<< std::endl;
-}
-
-RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm &copy ) : Form("RobotomyRequestForm", 72, 45), _target(copy.getTarget()) {
-	*this = copy;
-	std::cout << "RobotomyRequestForm copied" << std::endl;
-}
-
-RobotomyRequestForm &RobotomyRequestForm::operator=( const RobotomyRequestForm &assign ) {
-if (this == &assign)
-	return *this;
-
-return *this;
-	std::cout << "RobotomyRequestForm assigned" << std::endl;
+RobotomyRequestForm::RobotomyRequestForm( std::string target ) : AForm("RobotomyRequestForm", 72, 45) {
+	_target	= target;
+	std::cout << "Robotomy Request Form " + getName() + " constructed." << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm( void ) {
-	std::cout << "RobotomyRequestForm destructed" << std::endl;
+	std::cout << "Form " + getName() + " destructed." << std::endl;
 }
 
-/* -------------------- Member Functions -------------------- */
+RobotomyRequestForm::RobotomyRequestForm( const RobotomyRequestForm &copy ) : AForm( copy ) {
+	*this = copy;
+}
+
+RobotomyRequestForm &RobotomyRequestForm::operator=( const RobotomyRequestForm &assign ) {
+	this->_target = assign._target;
+	return *this;
+}
 
 void RobotomyRequestForm::execute( Bureaucrat const &executor ) const {
-	if ((int)executor.getGrade() > this->getGradeExec())
-		throw(Bureaucrat::GradeTooLowException());
-	else if (this->getSigned() == false)
-		throw(Form::FormNotSignedException());
-	else if (rand() % 2 == 0)
-		std::cout	<< "WHIRRRRRRR!! "
-					<< this->getTarget() << " was robotomized"
-					<< std::endl;
+	srand((unsigned) time(NULL));
+	int robotomise_or_not = rand() % 2;
+
+	std::cout << "Executor: " << executor.getName() << std::endl;
+	std::cout << "Initiating Robotomy on target: " << _target << std::endl;
+	std::cout << "BRRRRRRRR  BRRRRRRRRRR WHIRRRRRR BRBRBRBRBRBR" << RESET << std::endl;
+
+	if (robotomise_or_not)
+		std::cout << "Target " << _target << " robotomized successfully.";
 	else
-		std::cout << "Robotmy failed..." << std::endl;
-}
-
-std::string RobotomyRequestForm::getTarget( void ) const {
-	return this->_target;
-}
-
-std::ostream &operator<<( std::ostream &o, RobotomyRequestForm *a ) {
-	o	<< "Shrubbery Form " << a->getName()
-		<< "\n\tSign grade: " << a->getGradeSign()
-		<< "\n\tExec grade: " << a->getGradeExec()
-		<< "\n\tSigned? " << a->getSigned()
-		<< std::endl;
-	return o;
+		std::cout << "Target " << _target << " robotomy failed.";
+	std::cout << std::endl;
 }

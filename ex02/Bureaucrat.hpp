@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <exception>
-#include "Form.hpp"
+#include "AForm.hpp"
 
 # define RESET "\033[0m"
 # define RED "\033[31m"
@@ -13,7 +13,7 @@
 # define GREEN "\033[32m"
 # define PURPLE "\033[38;5;129m"
 
-class Form;
+class AForm;
 
 class Bureaucrat {
 	private:
@@ -32,10 +32,11 @@ class Bureaucrat {
 		std::string	getName( void ) const;
 		int			getGrade( void ) const;
 		void		setGrade( int grade );
-		void		promote( void );
-		void		demote( void );
+		void		promote( int grades );
+		void		demote( int grades );
 
-		void		signForm( Form &f );
+		void		signForm( AForm &f );
+		void		executeForm( AForm const &form );
 
 	class GradeTooHighException : public std::exception {
 		public:
@@ -43,6 +44,16 @@ class Bureaucrat {
 	};
 
 	class GradeTooLowException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+
+	class UnsignedFormException : public std::exception {
+		public:
+			virtual const char* what() const throw();
+	};
+	
+	class ExecGradeTooLowException : public std::exception {
 		public:
 			virtual const char* what() const throw();
 	};

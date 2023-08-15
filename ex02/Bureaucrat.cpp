@@ -99,11 +99,11 @@ void Bureaucrat::setGrade( int grade ) {
 		_grade = grade;
 }
 
-void	Bureaucrat::promote( void ) {
+void	Bureaucrat::promote( int grades ) {
 	bool fail = false;
 	try
 	{
-		setGrade(_grade - 1);
+		setGrade(_grade - grades);
 	}
 	catch(Bureaucrat::GradeTooHighException &e)
 	{
@@ -117,11 +117,11 @@ void	Bureaucrat::promote( void ) {
 		std::cout << "Bureaucrat " << _name << " promoted to " << _grade <<  std::endl;
 }
 
-void	Bureaucrat::demote( void ) {
+void	Bureaucrat::demote( int grades ) {
 	bool fail = false;
 	try
 	{
-		setGrade(_grade + 1);
+		setGrade(_grade + grades);
 	}
 	catch(Bureaucrat::GradeTooLowException &e)
 	{
@@ -135,7 +135,7 @@ void	Bureaucrat::demote( void ) {
 		std::cout << "Bureaucrat " << _name << " demoted to " << _grade <<  std::endl;
 }
 
-void	Bureaucrat::signForm( Form &f ) {
+void	Bureaucrat::signForm( AForm &f ) {
 	f.beSigned(*this);
 }
 
@@ -145,6 +145,14 @@ const char *Bureaucrat::GradeTooHighException::what( void ) const throw() {
 
 const char *Bureaucrat::GradeTooLowException::what( void ) const throw() {
 	return ("Grade too low.");
+}
+
+const char *Bureaucrat::UnsignedFormException::what( void ) const throw() {
+	return ("Form is unsigned.");
+}
+
+const char *Bureaucrat::ExecGradeTooLowException::what( void ) const throw() {
+	return ("Grade too low to execute form.");
 }
 
 std::ostream &operator<<( std::ostream &o, Bureaucrat *b ) {

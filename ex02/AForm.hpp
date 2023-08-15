@@ -1,31 +1,28 @@
 #pragma once
-#ifndef AFORM_HPP
-#define AFORM_HPP
 
 #include "Bureaucrat.hpp"
 
 class Bureaucrat;
 
-class Form {
-	protected:
+class AForm {
+	private:
 		const std::string	_name;
 		bool				_signed;
 		const int			_gradeSign;
 		const int			_gradeExec;
-		
-		Form( void );
-		Form( std::string name );
-		Form( int gradeSign, int gradeExec );
-		Form( std::string name, int gradeSign, int gradeExec );
 
 	public:
-		Form( const Form &copy );
-		virtual ~Form( void );
-		Form &operator=( const Form &assign );
+		AForm( void );
+		AForm( std::string name );
+		AForm( int gradeSign, int gradeExec );
+		AForm( std::string name, int gradeSign, int gradeExec );
+		AForm( const AForm &copy );
+		~AForm( void );
+		AForm &operator=( const AForm &assign );
 
 		void beSigned( Bureaucrat &person );
 
-		virtual std::string getName( void ) const = 0;
+		std::string getName( void ) const;
 		int getGradeSign( void ) const;
 		int getGradeExec( void ) const;
 		bool getSigned( void ) const;
@@ -41,12 +38,10 @@ class Form {
 			const char *what() const throw();
 	};
 
-	class FormNotSignedException : public std::exception {
+	class FormSigned : public std::exception {
 		public:
 			const char *what() const throw();
 	};
 };
 
-std::ostream &operator<<( std::ostream &o, Form *b );
-
-#endif
+std::ostream &operator<<( std::ostream &o, AForm *b );
