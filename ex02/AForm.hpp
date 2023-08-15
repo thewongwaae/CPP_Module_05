@@ -12,6 +12,8 @@ class AForm {
 		const int			_gradeExec;
 
 	public:
+		virtual void execute( Bureaucrat const &executor ) const = 0;
+
 		AForm( void );
 		AForm( std::string name );
 		AForm( int gradeSign, int gradeExec );

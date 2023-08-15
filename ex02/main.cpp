@@ -37,11 +37,11 @@ int main( void ) {
 	std::cout << "Cloned SCF: " << cloneSCF;
 
 	std::cout << "BOO INVALID SIGN GRADE: ";
-	cloneSCF->beSigned(boo);
+	cloneSCF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "BEE VALID SIGN GRADE: ";
-	cloneSCF->beSigned(bee);
+	cloneSCF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "Original SCF: " << SCF;
@@ -58,11 +58,11 @@ int main( void ) {
 
 	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
 	std::cout << "BOO SIGN FORM: ";
-	SCF->beSigned(boo);
+	SCF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "BEE ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
-	SCF->beSigned(bee);
+	SCF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "BOO INVALID EXECUTION GRADE: ";
@@ -88,11 +88,11 @@ int main( void ) {
 	std::cout << "Cloned RRF: " << cloneRRF;
 
 	std::cout << "BOO INVALID SIGN GRADE: ";
-	cloneRRF->beSigned(boo);
+	cloneRRF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "BEE VALID SIGN GRADE: ";
-	cloneRRF->beSigned(bee);
+	cloneRRF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "Original RRF: " << RRF;
@@ -110,11 +110,11 @@ int main( void ) {
 
 	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
 	std::cout << "BOO SIGN FORM: ";
-	RRF->beSigned(boo);
+	RRF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "BEE ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
-	RRF->beSigned(bee);
+	RRF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "BOO INVALID EXECUTION GRADE: ";
@@ -139,11 +139,11 @@ int main( void ) {
 	std::cout << "Cloned PPF: " << clonePPF;
 
 	std::cout << "BEE INVALID SIGN GRADE: ";
-	clonePPF->beSigned(bee);
+	clonePPF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "BOO VALID SIGN GRADE: ";
-	clonePPF->beSigned(boo);
+	clonePPF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "Original PPF: " << PPF;
@@ -160,11 +160,11 @@ int main( void ) {
 
 	std::cout << "\033[35m\n---------Execution--------\033[0m" << std::endl;
 	std::cout << "BEE SIGN FORM: ";
-	PPF->beSigned(bee);
+	PPF->beSigned(*bee);
 	std::cout << std::endl;
 
 	std::cout << "BOO ATTEMPT TO SIGN ALREADY SIGNED FORM: ";
-	PPF->beSigned(boo);
+	PPF->beSigned(*boo);
 	std::cout << std::endl;
 
 	std::cout << "BOO INVALID EXECUTION GRADE: ";
