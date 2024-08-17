@@ -1,53 +1,38 @@
 #pragma once
-#ifndef BUREAUCRAT_HPP
-#define BUREAUCRAT_HPP
-
+#include <string>
 #include <iostream>
-#include <exception>
 
-# define RESET "\033[0m"
-# define RED "\033[31m"
-# define CYAN "\033[36m"
-# define YELLOW "\033[38;5;220m"
-# define GREEN "\033[32m"
-# define PURPLE "\033[38;5;129m"
+#define LOWEST 150
+#define HIGHEST 1
 
-class Bureaucrat {
+class Bureaucrat  {
 	private:
-		const std::string	_name;
+		std::string const	_name;
 		int					_grade;
-
+	
 	public:
-		Bureaucrat( void );
-		Bureaucrat( std::string name );
-		Bureaucrat( int grade );
-		Bureaucrat( std::string name, int grade );
-		Bureaucrat( const Bureaucrat &copy );
-		Bureaucrat &operator=( const Bureaucrat &assign );
-		~Bureaucrat( void );
+		Bureaucrat();
+		Bureaucrat(std::string _name, int _grade);
+		Bureaucrat(Bureaucrat const & src);
+		~Bureaucrat();
 
-		std::string	getName( void ) const;
-		int			getGrade( void ) const;
-		void		setGrade( int grade );
-		void		promote( void );
-		void		demote( void );
+		Bureaucrat & operator=(Bureaucrat const & obj);
 
-	class GradeTooHighException : public std::exception {
-		public:
-			// some references declare and write function definition in the hpp this way
-			//const char* what() noexcept override
-			
-			// but to define in cpp, declare this way
-			const char* what() const throw();
-	};
+		std::string getName() const;
+		int         getGrade() const;
 
-	class GradeTooLowException : public std::exception {
-		public:
-			// what() is the error message printer for the exception class
-			const char* what() const throw();
-	};
+		void incrementGrade();
+		void decrementGrade();
+
+		class GradeTooHighException : public std::exception {
+			public:
+				const char *what() const throw();
+		};
+		class GradeTooLowException : public std::exception {
+			public:
+				const char *what() const throw();
+		};
+
 };
 
-std::ostream &operator<<( std::ostream &o, Bureaucrat *b );
-
-#endif
+std::ostream & operator<<(std::ostream & o, Bureaucrat const & obj);
