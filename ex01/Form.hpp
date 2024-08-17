@@ -22,7 +22,7 @@ class Form {
 		~Form( void );
 		Form &operator=( const Form &assign );
 
-		void beSigned( Bureaucrat &person );
+		void beSigned( const Bureaucrat &person );
 
 		std::string getName( void ) const;
 		int getGradeSign( void ) const;
@@ -32,12 +32,12 @@ class Form {
 
 	class GradeTooLowException : public std::exception {
 		public:
-			const char *what() const throw();
+			virtual const char *what() const throw();
 	};
 	
 	class GradeTooHighException : public std::exception {
 		public:
-			const char *what() const throw();
+			virtual const char *what() const throw();
 	};
 };
 

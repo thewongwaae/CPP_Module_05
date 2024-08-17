@@ -1,142 +1,69 @@
+#include <iostream>
+#include "Bureaucrat.hpp"
 #include "Form.hpp"
 
-int main(void)
-{
-	{
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat();
-		Form *b = new Form();
-		std::cout << std::endl;
+int main() {
+    try {
+        std::cout << "\n=== Test Form construction and grade validation ===" << std::endl;
+        try {
+            Form f1("Form1", 1, 1);
+            std::cout << &f1 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
+        try {
+            Form f2("Form2", 0, 1);
+            std::cout << &f2 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		try
-		{
-			b->beSigned(*a);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << a->getName() << " was not able to sign " << b->getName() << ": " << e.what() << std::endl;
-		}
+        try {
+            Form f3("Form3", 1, 151);
+            std::cout << &f3 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		std::cout << b;
-		std::cout << std::endl;
+        std::cout << "\n=== Test Form signing ===" << std::endl;
+        try {
+            Bureaucrat b1("Frank", 50);
+            Form f4("Form4", 100, 100);
+            std::cout << &f4 << std::endl;
+            b1.signForm(f4); // Should succeed
+            std::cout << &f4 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		std::cout << std::endl;
-	}
-	std::cout << "-------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
+        try {
+            Bureaucrat b2("Grace", 150);
+            Form f5("Form5", 100, 100);
+            std::cout << &f5 << std::endl;
+            b2.signForm(f5); // Should throw exception
+            std::cout << &f5 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Bureaucrat *a = new Bureaucrat("Assistant", 145);
-		Bureaucrat *b = new Bureaucrat("CEO", 1);
-		Form *c = new Form("Rent Contract", 140, 100);
-		std::cout << std::endl;
+        std::cout << "\n=== Test Form copy constructor and assignment operator ===" << std::endl;
+        try {
+            Form f6("Form6", 50, 50);
+            Form f7(f6); // Copy constructor
+            std::cout << &f6 << std::endl;
+            std::cout << &f7 << std::endl;
 
-		std::cout << "\033[34mTesting\033[0m" << std::endl;
-		std::cout << a;
-		std::cout << b;
-		std::cout << c;
+            Form f8("Form8", 100, 100);
+            f8 = f6; // Assignment operator
+            std::cout << &f8 << std::endl;
+        } catch (const std::exception &e) {
+            std::cerr << "Exception: " << e.what() << std::endl;
+        }
 
-		// Assistant signs the Form
-		try
-		{
-			// c->beSigned(*a);
-			a->signForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << a->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
+    } catch (const std::exception &e) {
+        std::cerr << "Unexpected exception: " << e.what() << std::endl;
+    }
 
-		// CEO signs the Form
-		std::cout << c;
-		try
-		{
-			c->beSigned(*b);
-			// b->signForm(*c);
-		}
-		catch(Bureaucrat::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33m" << b->getName() << " was not able to sign the Form " << c->getName() << ": " << e.what() << "\033[0m" << std::endl;
-		}
-		std::cout << c;
-
-		// try signing the from again
-		b->signForm(*c);
-		std::cout << std::endl;
-
-		std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-		delete a;
-		delete b;
-		delete c;
-		std::cout << std::endl;
-	}
-	std::cout << "-------------------------------------------------------" << std::endl;
-	{
-		std::cout << std::endl;
-
-		std::cout << "\033[34mConstructing\033[0m" << std::endl;
-		Form *a = NULL;
-
-		// sign-grade too high
-		try
-		{
-			a = new Form(160, 145);
-		}
-		catch (Form::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
-		}
-
-		// exec-grade too high
-		try
-		{
-			a = new Form(145, 160);
-		}
-		catch (Form::GradeTooLowException &e)
-		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
-		}
-
-		// sign-grade too low
-		try
-		{
-			a = new Form(-15, 145);
-		}
-		catch (Form::GradeTooHighException &e)
-		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
-		}
-
-		// exec-grade too low
-		try
-		{
-			a = new Form(145, -15);
-		}
-		catch (Form::GradeTooHighException &e)
-		{
-			std::cerr << "\033[33mConstructing default failed: " <<
-			e.what() << "\033[0m" << std::endl;
-		}
-
-		// Deconstruction to prevent unused variable, in this case will never be called
-		if (a != NULL)
-		{
-			std::cout << std::endl;
-			std::cout << "\033[34mDeconstructing\033[0m" << std::endl;
-			delete a;
-		}
-		std::cout << std::endl;
-	}
-	return (0);
+    return 0;
 }

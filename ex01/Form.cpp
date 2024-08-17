@@ -1,50 +1,50 @@
 #include "Form.hpp"
 
 Form::Form( void ) : _name("Mysterious form"), _signed(false), _gradeSign(150), _gradeExec(150) {
-	std::cout	<< GREEN << "Form " << _name
+	std::cout	<< "Form " << _name
 				<< " with sign grade [" << _gradeSign << "] "
 				<< "and sign exec grade [" << _gradeExec 
-				<< "] constructed" << RESET << std::endl;
+				<< "] constructed" << std::endl;
 }
 
 Form::Form( std::string name ) : _name(name), _signed(false), _gradeSign(150), _gradeExec(150) {
-	std::cout	<< GREEN << "Form " << _name
+	std::cout	<< "Form " << _name
 				<< " with sign grade [" << _gradeSign << "] "
 				<< "and sign exec grade [" << _gradeExec 
-				<< "] constructed" << RESET << std::endl;
+				<< "] constructed" << std::endl;
 }
 
 Form::Form( int gradeSign, int gradeExec ) : _name("Mysterious form"), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
-	std::cout	<< GREEN << "Trying to create Form " << _name
+	std::cout	<< "Trying to create Form " << _name
 				<< " with sign grade [" << gradeSign << "] "
 				<< "and sign exec grade [" << gradeExec 
-				<< "]" << RESET << std::endl;
+				<< "]" << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
 	else if (gradeSign > 150 || gradeExec > 150)
 		throw(GradeTooLowException());
 	else {
-		std::cout	<< GREEN << "Form " << _name
+		std::cout	<< "Form " << _name
 					<< " with sign grade [" << _gradeSign << "] "
 					<< "and sign exec grade [" << _gradeExec 
-					<< "] constructed" << RESET << std::endl;
+					<< "] constructed" << std::endl;
 	}
 }
 
 Form::Form( std::string name, int gradeSign, int gradeExec ) : _name(name), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
-	std::cout	<< GREEN << "Form " << _name
+	std::cout	<< "Form " << _name
 				<< " with sign grade [" << gradeSign << "] "
 				<< "and sign exec grade [" << gradeExec 
-				<< "] constructed" << RESET << std::endl;
+				<< "] constructed" << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
 	else if (gradeSign > 150 || gradeExec > 150)
 		throw(GradeTooLowException());
 	else {
-		std::cout	<< GREEN << "Form " << _name
+		std::cout	<< "Form " << _name
 					<< " with sign grade [" << _gradeSign << "] "
 					<< "and sign exec grade [" << _gradeExec 
-					<< "] constructed" << RESET << std::endl;
+					<< "] constructed" << std::endl;
 	}
 }
 
@@ -65,7 +65,7 @@ Form &Form::operator=( const Form &assign ) {
 	return *this;
 }
 
-void Form::beSigned( Bureaucrat &person ) {
+void Form::beSigned( const Bureaucrat &person ) {
 	if (person.getGrade() > this->getGradeSign())
 		throw(Bureaucrat::GradeTooLowException());
 	else if (!getSigned()) {
