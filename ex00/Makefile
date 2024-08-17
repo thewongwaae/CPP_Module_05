@@ -1,4 +1,4 @@
-NAME	= Bureaucrats
+NAME	= Bureaucrat
 CPP		= c++
 FLAGS	= -Wall -Wextra -Werror -I -std=c++98
 RM		= rm -rf
@@ -15,7 +15,7 @@ all : $(NAME)
 	@$(CPP) $(FLAGS) -c $< -o $@
 
 $(NAME) : $(OBJ)
-	@echo "\n\033[0;32mBureaucreats?\033[0m"
+	@echo "\n\033[0;32mBureaucrats?\033[0m"
 	@$(CPP) $(FLAGS) $^ -o $@
 
 clean:

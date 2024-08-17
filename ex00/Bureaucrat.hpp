@@ -1,25 +1,21 @@
 #pragma once
-#include <string>
-#include <iostream>
 
-#define LOWEST 150
-#define HIGHEST 1
+#include <iostream>
 
 class Bureaucrat  {
 	private:
-		std::string const	_name;
+		const std::string	_name;
 		int					_grade;
-	
+
 	public:
 		Bureaucrat();
-		Bureaucrat(std::string _name, int _grade);
-		Bureaucrat(Bureaucrat const & src);
+		Bureaucrat( std::string _name, int _grade );
+		Bureaucrat( Bureaucrat const &copy );
+		Bureaucrat &operator=( Bureaucrat const &copy );
 		~Bureaucrat();
 
-		Bureaucrat & operator=(Bureaucrat const & obj);
-
-		std::string getName() const;
-		int         getGrade() const;
+		std::string	getName() const;
+		int			getGrade() const;
 
 		void incrementGrade();
 		void decrementGrade();
@@ -35,4 +31,4 @@ class Bureaucrat  {
 
 };
 
-std::ostream & operator<<(std::ostream & o, Bureaucrat const & obj);
+std::ostream &operator<<( std::ostream & o, Bureaucrat const & obj );
