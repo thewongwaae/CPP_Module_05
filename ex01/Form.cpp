@@ -65,6 +65,7 @@ Form &Form::operator=( const Form &assign ) {
 	return *this;
 }
 
+
 void Form::beSigned( const Bureaucrat &person ) {
 	if (person.getGrade() > this->getGradeSign())
 		throw(Bureaucrat::GradeTooLowException());
@@ -75,6 +76,7 @@ void Form::beSigned( const Bureaucrat &person ) {
 	else
 		std::cout << "Form " << _name << " is already signed" << std::endl;
 }
+
 
 std::string Form::getName( void ) const {
 	return _name;
@@ -91,6 +93,7 @@ int Form::getGradeExec( void ) const {
 bool Form::getSigned( void ) const {
 	return _signed;
 }
+
 
 const char *Form::GradeTooHighException::what() const throw() {
 	return ("Form's grade requirement too high.");
