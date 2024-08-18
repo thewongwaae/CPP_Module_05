@@ -15,10 +15,6 @@ Form::Form( std::string name ) : _name(name), _signed(false), _gradeSign(150), _
 }
 
 Form::Form( int gradeSign, int gradeExec ) : _name("Mysterious form"), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
-	std::cout	<< "Trying to create Form " << _name
-				<< " with sign grade [" << gradeSign << "] "
-				<< "and sign exec grade [" << gradeExec 
-				<< "]" << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
 	else if (gradeSign > 150 || gradeExec > 150)
@@ -32,10 +28,6 @@ Form::Form( int gradeSign, int gradeExec ) : _name("Mysterious form"), _signed(f
 }
 
 Form::Form( std::string name, int gradeSign, int gradeExec ) : _name(name), _signed(false), _gradeSign(gradeSign), _gradeExec(gradeExec) {
-	std::cout	<< "Form " << _name
-				<< " with sign grade [" << gradeSign << "] "
-				<< "and sign exec grade [" << gradeExec 
-				<< "] constructed" << std::endl;
 	if (gradeSign < 1 || gradeExec < 1)
 		throw(GradeTooHighException());
 	else if (gradeSign > 150 || gradeExec > 150)
