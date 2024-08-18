@@ -1,6 +1,4 @@
 #pragma once
-#ifndef FORM_HPP
-#define FORM_HPP
 
 #include "Bureaucrat.hpp"
 
@@ -41,6 +39,4 @@ class Form {
 	};
 };
 
-std::ostream &operator<<( std::ostream &o, Form *b );
-
-#endif
+std::ostream &operator<<( std::ostream &o, Form *f );
