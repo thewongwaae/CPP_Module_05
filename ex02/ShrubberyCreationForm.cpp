@@ -2,12 +2,10 @@
 
 ShrubberyCreationForm::ShrubberyCreationForm( void ) : AForm("ShrubberyCreationForm", 145, 137) {
 	_target	= "Unknown";
-	std::cout << "Shrubbery Creation Form " + getName() + " constructed." << std::endl;
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm( std::string target ) : AForm("ShrubberyCreationForm", 145, 137) {
 	_target	= target;
-	std::cout << "Shrubbery Creation Form " + getName() + " constructed." << std::endl;
 }
 
 ShrubberyCreationForm::~ShrubberyCreationForm( void ) {
@@ -24,7 +22,6 @@ ShrubberyCreationForm &ShrubberyCreationForm::operator=( const ShrubberyCreation
 }
 
 void ShrubberyCreationForm::execute( Bureaucrat const &executor ) const {
-
 	std::cout << "Executor: " << executor.getName() << std::endl;
 	std::cout << "Shrubbery Created!" << std::endl;
 	std::ofstream file(_target + "_shrubbery");

@@ -1,13 +1,11 @@
 #include "PresidentialPardonForm.hpp"
 
-PresidentialPardonForm::PresidentialPardonForm( void ) : AForm("PPF", 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm( void ) : AForm("PresidentialPardonForm", 25, 5) {
 	_target	= "Unknown";
-	std::cout << "Presidential Pardon Form " + getName() + " constructed." << std::endl;
 }
 
-PresidentialPardonForm::PresidentialPardonForm( std::string target ) : AForm("PPF", 25, 5) {
+PresidentialPardonForm::PresidentialPardonForm( std::string target ) : AForm("PresidentialPardonForm", 25, 5) {
 	_target	= target;
-	std::cout << "Presidential Pardon Form " + getName() + " constructed." << std::endl;
 }
 
 PresidentialPardonForm::~PresidentialPardonForm( void ) {

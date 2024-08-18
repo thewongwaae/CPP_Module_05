@@ -3,12 +3,10 @@
 
 RobotomyRequestForm::RobotomyRequestForm( void ) : AForm("RobotomyRequestForm", 72, 45) {
 	_target	= "Unknown";
-	std::cout << "Robotomy Request Form " + getName() + " constructed." << std::endl;
 }
 
 RobotomyRequestForm::RobotomyRequestForm( std::string target ) : AForm("RobotomyRequestForm", 72, 45) {
 	_target	= target;
-	std::cout << "Robotomy Request Form " + getName() + " constructed." << std::endl;
 }
 
 RobotomyRequestForm::~RobotomyRequestForm( void ) {
@@ -30,7 +28,7 @@ void RobotomyRequestForm::execute( Bureaucrat const &executor ) const {
 
 	std::cout << "Executor: " << executor.getName() << std::endl;
 	std::cout << "Initiating Robotomy on target: " << _target << std::endl;
-	std::cout << "BRRRRRRRR  BRRRRRRRRRR WHIRRRRRR BRBRBRBRBRBR" << RESET << std::endl;
+	std::cout << "BRRRRRRRR  BRRRRRRRRRR WHIRRRRRR BR  BRBRBRBRBR" << std::endl;
 
 	if (robotomise_or_not)
 		std::cout << "Target " << _target << " robotomized successfully.";
